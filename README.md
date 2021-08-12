@@ -1,4 +1,4 @@
-# Sadbox NodeJs App
+# Sandbox NodeJs App
 
 Nodwjs sample application to be deployed with CodePipeline using ECS bluie/green deployment
 
