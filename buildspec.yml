@@ -12,6 +12,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Docker image build commenced...
+      - docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
@@ -23,7 +24,7 @@ phases:
       - sed -i 's/<SERVICE_PORT>/'$SERVICE_PORT'/g' appspec.yml task.json
       - sed -i 's/<AWS_ACCOUNT_ID>/'$AWS_ACCOUNT_ID'/g' task.json
       - sed -i 's/<MEMORY_RESV>/'$MEMORY_RESV'/g' task.json
-      - sed -i 's/<IMAGE_NAME>/'$AWS_ACCOUNT_ID'\.dkr\.ecr\.'$AWS_DEFAULT_REGION'\.amazonaws.com\/'$IMAGE_REPO_NAME'\:'$IMAGE_TAG'/g' taskdef.json
+      - sed -i 's/<IMAGE_NAME>/'$AWS_ACCOUNT_ID'\.dkr\.ecr\.'$AWS_DEFAULT_REGION'\.amazonaws.com\/'$IMAGE_REPO_NAME'\:'$IMAGE_TAG'/g' task.json
 artifacts:
   files:
     - imageDetail.json
