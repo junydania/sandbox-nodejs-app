@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 
 
 router.get('/health', (req, res) => {
-    res.status(200).json({ success: true, data: 'Yay! I am healthy!' });
+    res.status(200).json({ success: true, data: 'Yay! I am healthy! Thats right!' });
 });
 
 
